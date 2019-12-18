@@ -1,0 +1,9 @@
+{
+    "name": "King Shan",
+    "gender": "m",
+    "spouse":{
+        "name": "Queen Anga",
+        "gender": "f",
+    },
+    
+}
