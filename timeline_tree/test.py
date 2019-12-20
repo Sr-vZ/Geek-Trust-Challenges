@@ -150,7 +150,7 @@ forceatlas2 = ForceAtlas2(
 
                         # Log
                         verbose=True)
-# pos = forceatlas2.forceatlas2_networkx_layout(G, pos=None, iterations=100)
+# pos = forceatlas2.forceatlas2_networkx_layout(G, pos=None, iterations=1000)
 # pos = nx.spring_layout(G)  # default layout like in your code
 # fig, ax = plt.subplots(figsize=(200, 200))
 # fig, ax = plt.subplots()
@@ -170,8 +170,8 @@ for node, node_pos in pos.items():
         pos_[1] = other_x[node]
         # pos[node] = pos_
         pos[node] = tuple(pos_)
-print(other_x)
-print(pos)
+# print(other_x)
+# print(pos)
 # nx.draw(G, pos=pos, ax=ax)
 
 # Produce the curves
@@ -180,6 +180,9 @@ print(pos)
 
 # nx.draw(G, pos=pos, width=0.2, node_color='skyblue', ax=ax)
 nx.draw(G, pos=pos, width=0.2, node_color='skyblue', ay=ay)
+# nx.draw_networkx_nodes(G, pos=pos, node_size=10, node_color='skyblue', alpha=1)
+# nx.draw_networkx_edges(G, pos=pos, width=0.2)
+print(G.edges)
 # nx.draw(G, nx.graphviz_layout(G, prog='dot'))
 # nx.draw_networkx_nodes(G, pos, node_size=10, node_color='skyblue', alpha=1)
 # nx.draw_networkx_edges(G, pos=nx.spring_layout(G))
