@@ -4,14 +4,10 @@ import numpy as np
 from bokeh.io import show, output_file
 from bokeh.models import Plot, Range1d, MultiLine, Circle, HoverTool, BoxZoomTool, ResetTool
 from bokeh.models.graphs import from_networkx
-from bokeh.palettes import Spectral4
 from bokeh.models import HoverTool, ColumnDataSource, LabelSet, Label
 from bokeh.plotting import figure, show
 from networkx.drawing.nx_pydot import write_dot
-import bezier
 from bokeh.models.glyphs import Bezier
-import os
-os.environ["PATH"] += os.pathsep + 'C:/Users/608619925/Downloads/graphviz-2.38/release/bin'
 
 # Prepare Data
 G = nx.Graph()
@@ -35,6 +31,7 @@ for index, row in data.iterrows():
 # Show with Bokeh
 # plot = Plot(plot_width=900, plot_height=1200,x_range=Range1d(-10, 10), y_range=Range1d(-1.1, 1.1))
 pos = nx.spring_layout(G, k=1000*1/np.sqrt(len(G.nodes())), iterations=2500, scale=5)
+# pos = nx.circular_layout(G)
 # nx.draw_planar(G, with_labels=True)
 # pos = nx.spectral_layout(G)
 
@@ -47,11 +44,16 @@ for node, node_pos in pos.items():
         pos_ = pos[node]
         # pos_ = list(pos[node])
         pos_[1] = other_y[node]
-        pos_[0] = other_x[node]
+        # if i%2 == 0:
+        #     x = 100
+        # else:
+        #     x = 200
+        # pos_[0] = other_y[node]
+        # pos_[0] = G.degree(node)
         # pos_[0] = i
         pos[node] = pos_
         # pos[node] = tuple(pos_)
-        # i=i+100
+        i=i+1
         print(node, node_pos, pos[node],other_y[node])
 
 nodes, nodes_coordinates = zip(*sorted(pos.items()))
@@ -88,8 +90,7 @@ def get_edges_specs(_network, _layout):
     # def calc_alpha(h): return 0.1 + 0.6 * (h / max_weight)
 
     # example: { ..., ('user47', 'da_bjoerni', {'weight': 3}), ... }
-    for u, v, data in _network.edges(data=True):
-        
+    for u, v, data in _network.edges(data=True):       
 
         # nodes1 = np.asfortranarray([x1,y1])
         # curve1 = bezier.Curve(nodes1, degree=2)
@@ -101,10 +102,10 @@ def get_edges_specs(_network, _layout):
         d['y0'] .append(_layout[u][1])
         d['x1'] .append(_layout[v][0])
         d['y1'] .append(_layout[v][1])
-        d['cx0'].append( _layout[u][0]-0.1)
-        d['cy0'].append( _layout[u][1]-0.)
+        d['cx0'].append( _layout[u][0]-0.2)
+        d['cy0'].append( _layout[u][1]-0.2)
         d['cx1'].append( _layout[v][0]+0.2)
-        d['cy1'].append( _layout[v][1]-0.2)
+        d['cy1'].append( _layout[v][1]+0.2)
         
     return d
 

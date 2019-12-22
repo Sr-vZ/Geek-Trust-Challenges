@@ -7,9 +7,8 @@ import seaborn as sns
 import warnings
 import networkx as nx
 import numpy as np
-import bezier
-from fa2 import ForceAtlas2
-
+# from fa2 import ForceAtlas2
+# from networkx import graphviz_layout
 
 def curved_edges(G, pos, dist_ratio=0.2, bezier_precision=20, polarity='random'):
     # Get nodes into np array
@@ -126,30 +125,32 @@ filtredData = [data['Publication_Year'], data['ID']]
 # print(data['Commentary_IDs'][122])
 # plt.scatter(filtredData[1], filtredData[0], marker='o', color="red")
 pos = nx.spring_layout(G, k=100*1/np.sqrt(len(G.nodes())), iterations=2000, scale=10)
-# pos = nx.spiral_layout(G)
+# pos = nx.graphviz_layout(G,prog='twopi',args='')
+# pos = nx.nx_agraph.graphviz_layout(G, prog='dot')
+# pos = nx.circular_layout(G)
 # print(pos)
 # pos = nx.nx_agraph.graphviz_layout(G, prog='dot')
-forceatlas2 = ForceAtlas2()
-forceatlas2 = ForceAtlas2(
-                        # Behavior alternatives
-                        outboundAttractionDistribution=False,  # Dissuade hubs
-                        linLogMode=False,  # NOT IMPLEMENTED
-                        adjustSizes=False,  # Prevent overlap (NOT IMPLEMENTED)
-                        edgeWeightInfluence=1.0,
+# forceatlas2 = ForceAtlas2()
+# forceatlas2 = ForceAtlas2(
+#                         # Behavior alternatives
+#                         outboundAttractionDistribution=False,  # Dissuade hubs
+#                         linLogMode=False,  # NOT IMPLEMENTED
+#                         adjustSizes=False,  # Prevent overlap (NOT IMPLEMENTED)
+#                         edgeWeightInfluence=1.0,
 
-                        # Performance
-                        jitterTolerance=0.1,  # Tolerance
-                        barnesHutOptimize=True,
-                        barnesHutTheta=1.2,
-                        multiThreaded=False,  # NOT IMPLEMENTED
+#                         # Performance
+#                         jitterTolerance=0.1,  # Tolerance
+#                         barnesHutOptimize=True,
+#                         barnesHutTheta=1.2,
+#                         multiThreaded=False,  # NOT IMPLEMENTED
 
-                        # Tuning
-                        scalingRatio=5.0,
-                        strongGravityMode=False,
-                        gravity=0.01,
+#                         # Tuning
+#                         scalingRatio=5.0,
+#                         strongGravityMode=False,
+#                         gravity=0.01,
 
-                        # Log
-                        verbose=True)
+#                         # Log
+#                         verbose=True)
 # pos = forceatlas2.forceatlas2_networkx_layout(G, pos=None, iterations=1000)
 # pos = nx.spring_layout(G)  # default layout like in your code
 # fig, ax = plt.subplots(figsize=(200, 200))
